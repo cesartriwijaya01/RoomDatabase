@@ -1,65 +1,33 @@
-package com.example.roomdatabase.adapter;
+public class RecyclerViewAdapter extends RecyclerView.Adapter{
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+    private ArrayList namaList; //Digunakan untuk Nama
+    private ArrayList jurusanList; //Digunakan untuk Jurusan
+    private ArrayList nimList; //Digunakan untuk Jurusan
+    private Context context; //Membuat Variable Context
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.roomdatabase.R;
-import com.example.roomdatabase.room.Mahasiswa;
-
-import java.util.List;
-
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> {
-    private Context mContext;
-    private List<Mahasiswa> myList;
-
-    public RecycleAdapter(Context mContext, List<Mahasiswa> albumList) {
-        this.mContext = mContext;
-        this.myList = albumList;
+    //Membuat Konstruktor pada Class RecyclerViewAdapter
+    RecyclerViewAdapter(ArrayList namaList, ArrayList jurusanList, ArrayList nimList){
+        this.namaList = namaList;
+        this.jurusanList = jurusanList;
+        this.nimList = nimList;
     }
 
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_mahasiswa, viewGroup, false);
+    //ViewHolder Digunakan Untuk Menyimpan Referensi Dari View-View
+    class ViewHolder extends RecyclerView.ViewHolder{
 
-        return new MyViewHolder(itemView);
-    }
+        private TextView Nama, Jurusan, Nim;
+        private ImageButton Overflow;
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        final Mahasiswa album = myList.get(i);
-        myViewHolder.tvNama.setText(album.getNama());
-        myViewHolder.tvNim.setText(album.getNim());
-        myViewHolder.tvKejuruan.setText(album.getKejuruan());
-        myViewHolder.tvAlamat.setText(album.getAlamat());
-    }
-
-    @Override
-    public int getItemCount() {
-        return myList.size();
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvAlamat;
-        public TextView tvKejuruan;
-        public TextView tvNama;
-        public TextView tvNim;
-
-        public MyViewHolder(@NonNull View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            tvAlamat = itemView.findViewById(R.id.tvAlamat);
-            tvKejuruan = itemView.findViewById(R.id.tvKejuruan);
-            tvNim = itemView.findViewById(R.id.tvNim);
-            tvNama = itemView.findViewById(R.id.tvNama);
+
+            //Mendapatkan Context dari itemView yang terhubung dengan Activity ViewData
+            context = itemView.getContext();
+
+            //Menginisialisasi View-View untuk kita gunakan pada RecyclerView
+            Nama = itemView.findViewById(R.id.name);
+            Jurusan = itemView.findViewById(R.id.jurusan);
+            Overflow = itemView.findViewById(R.id.overflow);
+            Nim = itemView.findViewById(R.id.NIM);
         }
     }
-
-
-}

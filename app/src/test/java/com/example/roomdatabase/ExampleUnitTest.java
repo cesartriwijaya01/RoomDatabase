@@ -1,17 +1,25 @@
-package com.example.roomdatabase;
+buildscript {
+        repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        }
+        dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // <-- Add this line
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        }
+        }
 
-import org.junit.Test;
+        allprojects {
+        repositories {
+        google()
+        jcenter()
 
-import static org.junit.Assert.*;
+        }
+        }
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
-}
+        task clean(type: Delete) {
+        delete rootProject.buildDir
+        }
